@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href=".\css\styles.css">
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <canvas id="canvas" style="border:1px solid black"></canvas>
+  </body>
+</html>
+<script src=".\scripts\jquery-3.3.1.js"></script>
+<script src=".\scripts\configuration.js"></script>
+<script src=".\scripts\render.js"></script>
+<script src=".\scripts\image.js"></script>
+<script src=".\scripts\main.js"></script>
+<script src=".\scripts\shape.js"></script>
+<script src=".\scripts\J_Shape.js"></script>
+<script src=".\scripts\L_Shape.js"></script>
+<script src=".\scripts\Line_Shape.js"></script>
+<script src=".\scripts\S_Shape.js"></script>
+<script src=".\scripts\Square_Shape.js"></script>
+<script src=".\scripts\T_Shape.js"></script>
+<script src=".\scripts\Z_Shape.js"></script>
+<script src=".\scripts\Grid.js"></script>
+<script src=".\scripts\ShapeFactory.js"></script>
+<script src=".\scripts\keyboardHandler.js"></script>
+
+<script type="text/javascript">
+   $(document).ready(function() {
+        var main = new Main("canvas", Configuration);
+        main.initializeGame();
+        main.gameLoop();
+        
+        //main.testCode();
+   });
+</script>
