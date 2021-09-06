@@ -22,12 +22,14 @@ class Grid {
   // Assigns the shape as the current shape for the grid. The grid isn't a part of
   // the grid at this point.
   addShape(shape) {
+    //console.log("addShape: Start");
     // Top row of shape aligns with top row of Grid
     // Mid point of shape aligns with mid point of Grid
     this.shape = shape;
     this.shape.left = Math.round((this.columns - shape.width) / 2.0);
     this.shape.top = 0;
 
+    //console.log("addShape: End");
     return this.moveShape(0, 0, true);
   }
 
@@ -35,19 +37,19 @@ class Grid {
   //    Block won't be placed outside the matrix limits
   //    Block won't be placed in an occupied location of the matrix 
   // Return true / false accordingly
-  canMoveShape(rowDelta, columDelta, definition) {
-    //console.log("canMoveShape: Start");
+  canMoveShape(rowDelta, columDelta, shapeDefinition) {
+  //  console.log("canMoveShape: Start");
     var canMove = true;
     var self = this;
+    //console.log("canMoveShape: self shape top: " + self.shape.top);
+    //console.log("canMoveShape: self shape left: " + self.shape.left);
+    //console.log("shapeDefinition: " + JSON.stringify(shapeDefinition));
    
-    $.each(definition, function (id, block) {    
-      //console.log("--> $.each");
+    $.each(shapeDefinition, function (id, block) {    
       var newBlockRow = block.row + self.shape.top + rowDelta;
       var newBlockCol = block.col + self.shape.left + columDelta;
-      //console.log("---> nbr: " + newBlockRow + ", this.rows: " + self.rows);
       if (newBlockRow >= self.rows)
       {
-        console.log("==>Rows");
         canMove = false;
         return;
       }
@@ -59,19 +61,18 @@ class Grid {
         canMove = false;
         return;
       }
-      else if (self.grid[newBlockRow][newBlockCol] != null) {
-        console.log("==>cell full");
+      else if (self.grid[newBlockRow][newBlockCol] != null) {        
         canMove = false;
         return;
       }      
     })
-
-    //console.log("canMoveShape: End");
+    
     return canMove;
   }
 
   // Move associated shape down one row
   moveShapeDown() {    
+    //console.log("moveDown");
     return this.moveShape(1, 0, false);
   }
   
@@ -83,6 +84,10 @@ class Grid {
   // Move associated shape right one column
   moveShapeRight() {
     return this.moveShape(0, 1, false);
+  }
+
+  moveShapeUp() {
+    return this.moveShape(-1, 0, false);
   }
 
 // Move existing shape or passed in shape to the specified location
@@ -108,8 +113,7 @@ class Grid {
     //console.log("-->>calling canMoveShape");
     canMove = this.canMoveShape(rowDelta, colDelta, definition);
     //console.log("moveShape: canMove: " + canMove.toString());
-    if (canMove) {
-      //console.log("mS: canMove: ");
+    if (canMove) {      
       if (!justCheck) {
         //console.log("mS: !justCheck: ");
         this.shape.top += rowDelta;
@@ -118,6 +122,18 @@ class Grid {
     }
     //console.log("moveShape: end");
     return canMove;
+  }
+
+  fitLastShapeIn() {
+
+    if (this.shape.top == 0) {
+      console.log("fitLastShapeIn: completely full up")
+    }
+
+    console.log("fitLastShapeIn - shape left, top: " + this.shape.left + ", " + this.shape.top);
+    if (this.shape.definition != null) {
+      console.log("definition is not null");
+    }
   }
 
   // Place associated shape permanently in the grids (when it reaches bottom row)
@@ -179,6 +195,7 @@ class Grid {
         row--;
     }
 
+    //console.log("removeFullRows: return: " + rowsFull);
     return rowsFull;
   }
 

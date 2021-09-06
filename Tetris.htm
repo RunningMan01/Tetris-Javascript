@@ -6,7 +6,15 @@
     <title></title>
   </head>
   <body>
-    <canvas id="canvas" style="border:1px solid black"></canvas>
+    <div id="scores">
+      <label id="labelScore">Score:&nbsp;</label>
+      <label id="labelScoreValue">0</label> 
+      <button id="buttonStart">Start</button>    
+    </div>
+    <div id="container">
+      <label id="labelGameOver">Game Over</label>
+      <canvas id="canvas"></canvas>
+    </div>
   </body>
 </html>
 <script src=".\scripts\jquery-3.3.1.js"></script>
@@ -26,12 +34,21 @@
 <script src=".\scripts\ShapeFactory.js"></script>
 <script src=".\scripts\keyboardHandler.js"></script>
 
-<script type="text/javascript">
+<script type="text/javascript">  
    $(document).ready(function() {
-        var main = new Main("canvas", Configuration);
-        main.initializeGame();
-        main.gameLoop();
+        //var main = new Main("canvas", "#lines", Configuration);
+        //main.initializeGame();
+        //main.gameLoop();
         
         //main.testCode();
    });
+
+   $("#buttonStart").click(function() {
+        //alert("start game");
+        var main = new Main("canvas", "#lines", Configuration);
+        
+        // main = new Main("canvas", "#lines", Configuration);
+        main.initializeGame();
+        main.startGameLoop();
+   })
 </script>
