@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href=".\css\styles.css">
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div id="scores">
+      <label id="labelScore">Score:&nbsp;</label>
+      <label id="labelScoreValue">0</label> 
+      <button id="buttonStart">Start</button>    
+    </div>
+    <div id="container">
+      <label id="labelGameOver">Game Over</label>
+      <canvas id="canvas"></canvas>
+    </div>
+  </body>
+</html>
+<script src=".\scripts\jquery-3.3.1.js"></script>
+<script src=".\scripts\configuration.js"></script>
+<script src=".\scripts\render.js"></script>
+<script src=".\scripts\image.js"></script>
+<script src=".\scripts\main.js"></script>
+<script src=".\scripts\shape.js"></script>
+<script src=".\scripts\J_Shape.js"></script>
+<script src=".\scripts\L_Shape.js"></script>
+<script src=".\scripts\Line_Shape.js"></script>
+<script src=".\scripts\S_Shape.js"></script>
+<script src=".\scripts\Square_Shape.js"></script>
+<script src=".\scripts\T_Shape.js"></script>
+<script src=".\scripts\Z_Shape.js"></script>
+<script src=".\scripts\Grid.js"></script>
+<script src=".\scripts\ShapeFactory.js"></script>
+<script src=".\scripts\keyboardHandler.js"></script>
+
+<script type="text/javascript">  
+   $(document).ready(function() {
+        //var main = new Main("canvas", "#lines", Configuration);
+        //main.initializeGame();
+        //main.gameLoop();
+        
+        //main.testCode();
+   });
+
+   $("#buttonStart").click(function() {
+        //alert("start game");
+        var main = new Main("canvas", "#lines", Configuration);
+        
+        // main = new Main("canvas", "#lines", Configuration);
+        main.initializeGame();
+        main.startGameLoop();
+   })
+</script>

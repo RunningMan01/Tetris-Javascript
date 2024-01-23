@@ -1,0 +1,55 @@
+canvas {
+    padding-left: 0;
+    padding-right: 0;
+    /* margin-left: auto;
+    margin-right: auto; */
+    display: block;
+    float: left;
+    /* border:1px solid grey; */    
+}
+
+body {
+    background-color: darkgrey;
+}
+
+#container {
+    width: 250px;
+    height: 500px;
+    margin:0 auto 0 auto;
+    border: 2px solid lightgray;
+    background-color: #444;
+}
+
+#scores {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+    height: 100px;
+    padding-left: 0;
+    padding-right: 0;
+    background-color: #444;
+    margin:0 auto 0 auto;    
+    border: 2px solid lightgray;
+    position: relative;
+}
+
+label {
+    font-size:36px;
+    font-family: "Impact";
+    color: white;
+}
+
+#buttonStart {
+    position: absolute;
+    right:0;
+    bottom:0;
+    width:100%;
+}
+
+#labelGameOver {
+    position:absolute;
+    text-align: center;
+    width:250px;
+    visibility: hidden;    
+}
