@@ -22,7 +22,6 @@ class Grid {
   // Assigns the shape as the current shape for the grid. The grid isn't a part of
   // the grid at this point.
   addShape(shape) {
-    //console.log("addShape: Start");
     // Top row of shape aligns with top row of Grid
     // Mid point of shape aligns with mid point of Grid
     this.shape = shape;
@@ -38,12 +37,8 @@ class Grid {
   //    Block won't be placed in an occupied location of the matrix 
   // Return true / false accordingly
   canMoveShape(rowDelta, columDelta, shapeDefinition) {
-  //  console.log("canMoveShape: Start");
     var canMove = true;
-    var self = this;
-    //console.log("canMoveShape: self shape top: " + self.shape.top);
-    //console.log("canMoveShape: self shape left: " + self.shape.left);
-    //console.log("shapeDefinition: " + JSON.stringify(shapeDefinition));
+    var self = this;  
    
     $.each(shapeDefinition, function (id, block) {    
       var newBlockRow = block.row + self.shape.top + rowDelta;
@@ -120,7 +115,6 @@ class Grid {
         this.shape.left += colDelta;
       }
     }
-    //console.log("moveShape: end");
     return canMove;
   }
 

@@ -1,11 +1,20 @@
-canvas {
+#canvasGrid {
     padding-left: 0;
-    padding-right: 0;
+    padding-right: 0;    
     /* margin-left: auto;
     margin-right: auto; */
-    display: block;
-    float: left;
-    /* border:1px solid grey; */    
+    /* display: block */
+    /** float: left; */
+    border:1px solid green;
+    /* border: 2px solid lightgray; */
+    margin: 0;
+    padding: 0;
+}
+
+#canvasPreview {
+    /* display: block;
+    float: left; */
+    /* border: 2px solid red; */
 }
 
 body {
@@ -13,9 +22,26 @@ body {
 }
 
 #container {
-    width: 250px;
-    height: 500px;
+    width: 384px;
+    /* height: 500px; */
     margin:0 auto 0 auto;
+    padding: 0;
+}
+
+#containerGrid {
+    float: left;
+    height: 502px;
+    /* border: 2px solid lightgray; */
+    background-color: #444;
+    padding: 0;
+    margin: 0;
+    /* border: 1px solid red; */
+}
+
+#containerPreview {
+    float: left;
+    width: 125px;
+    height: 125px;
     border: 2px solid lightgray;
     background-color: #444;
 }

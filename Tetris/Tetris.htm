@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <link rel="stylesheet" href=".\css\styles.css">
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <div id="scores">
-      <label id="labelScore">Score:&nbsp;</label>
-      <label id="labelScoreValue">0</label> 
-      <button id="buttonStart">Start</button>    
-    </div>
-    <div id="container">
-      <label id="labelGameOver">Game Over</label>
-      <canvas id="canvas"></canvas>
-    </div>
-  </body>
+    <head>
+        <link rel="stylesheet" href=".\css\styles.css">
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <div id="scores">
+            <label id="labelScore">Score:&nbsp;</label>
+            <label id="labelScoreValue">0</label> 
+            <button id="buttonStart">Start</button>    
+        </div>
+        <div id="container">
+            <div id="containerGrid">
+                <label id="labelGameOver">Game Over</label>
+                <canvas id="canvasGrid"></canvas>
+            </div>
+            <div id="containerPreview">
+                <canvas id="canvasPreview"></canvas>
+            </div>
+        </div>
+    </body>
 </html>
 <script src=".\scripts\jquery-3.3.1.js"></script>
 <script src=".\scripts\configuration.js"></script>
@@ -34,20 +39,23 @@
 <script src=".\scripts\ShapeFactory.js"></script>
 <script src=".\scripts\keyboardHandler.js"></script>
 
-<script type="text/javascript">  
-   $(document).ready(function() {
-        //var main = new Main("canvas", "#lines", Configuration);
-        //main.initializeGame();
-        //main.gameLoop();
-        
-        //main.testCode();
-   });
+<script type="text/javascript">
 
-   $("#buttonStart").click(function() {
-        //alert("start game");
-        var main = new Main("canvas", "#lines", Configuration);
+    $(document).ready(function () {
+
+        var gridHeight = Configuration.blockSize * Configuration.rows;
+        var gridWidth = Configuration.blockSize * Configuration.columns;
         
-        // main = new Main("canvas", "#lines", Configuration);
+        $("#canvasGrid").attr("width", gridWidth);
+        $("#canvasGrid").attr("height", gridHeight);
+
+        $("#containerGrid").attr("width", gridwidth + 2);
+        $("#containerGrid").attr("height", gridheight + 2);
+    })
+
+   $("#buttonStart").click(function() {        
+       var main = new Main("canvasGrid", "#lines", Configuration);
+        
         main.initializeGame();
         main.startGameLoop();
    })

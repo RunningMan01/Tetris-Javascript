@@ -14,7 +14,7 @@ class Main {
     #currentUserMovementTime;
     #rowsCounter;
     constructor(canvasId, linesId, configuration) {
-      this.#canvasId = canvasId;
+      this.#canvasId = '#' + canvasId;
       this.#linesId = linesId;
       this.#configuration = configuration;
       this.#ctx = document.getElementById(canvasId).getContext("2d");
@@ -28,8 +28,6 @@ class Main {
     }
       
     initializeGame() {     
-      $(this.#canvasId).attr("width", this.#configuration.blockSize * this.#configuration.columns);
-      $(this.#canvasId).attr("height", this.#configuration.blockSize * this.#configuration.rows);
       this.#grid = this.grid = new Grid(this.#configuration.rows, this.#configuration.columns);
     }
 
