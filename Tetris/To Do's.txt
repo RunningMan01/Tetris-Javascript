@@ -1,0 +1,12 @@
+To Do's
+
+1. Correct position of preview shape, maybes add properties to shape object to position better
+	Preview shape position would be better with half block indented
+2. Cancel all keys presses after shape has been placed
+3. Move shape classes in separate folder
+
+0. Shapes appear too low down on grid, not on top row
+1. Draw block coloured, at specific row, column
+2. BlockSize shouldnt be in shape objects, only in render
+3. Create template of class, inherits from super class, private / public modifiers etc.
+4. Add shape definition data to configuration (eg. number of shapes) and refer to this in ShapeFactory ??

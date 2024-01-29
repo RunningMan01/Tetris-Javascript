@@ -1,0 +1,81 @@
+#canvasGrid {
+    padding-left: 0;
+    padding-right: 0;    
+    /* margin-left: auto;
+    margin-right: auto; */
+    /* display: block */
+    /** float: left; */
+    /* border:1px solid green; */
+    border: 2px solid lightgray;
+    margin: 0;
+    padding: 0;
+}
+
+#canvasPreview {
+    /* display: block;
+    float: left; */
+    /* border: 2px solid red; */
+}
+
+body {
+    background-color: darkgrey;
+}
+
+#container {
+    width: 384px;
+    /* height: 500px; */
+    margin:0 auto 0 auto;
+    padding: 0;
+}
+
+#containerGrid {
+    float: left;
+    /* height: 502px; */
+    /* border: 2px solid lightgray; */
+    background-color: #444;
+    padding: 0;
+    margin: 0;
+    /* border: 1px solid red; */
+}
+
+#containerPreview {
+    float: left;
+    width: 100px;
+    height: 100px;
+    border: 2px solid lightgray;
+    background-color: #444;
+}
+
+#scores {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+    height: 100px;
+    padding-left: 0;
+    padding-right: 0;
+    background-color: #444;
+    margin:0 auto 0 auto;    
+    border: 2px solid lightgray;
+    position: relative;
+}
+
+label {
+    font-size:36px;
+    font-family: "Impact";
+    color: white;
+}
+
+#buttonStart {
+    position: absolute;
+    right:0;
+    bottom:0;
+    width:100%;
+}
+
+#labelGameOver {
+    position:absolute;
+    text-align: center;
+    width:250px;
+    visibility: hidden;    
+}
