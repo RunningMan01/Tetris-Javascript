@@ -45,18 +45,19 @@
 
         var gridHeight = Configuration.blockSize * Configuration.rows;
         var gridWidth = Configuration.blockSize * Configuration.columns;
-        
-        $("#canvasGrid").attr("width", gridWidth);
-        $("#canvasGrid").attr("height", gridHeight);
 
-        $("#containerGrid").attr("width", gridwidth + 2);
-        $("#containerGrid").attr("height", gridheight + 2);
+        $("#canvasGrid").prop("width", gridWidth);
+        $("#canvasGrid").prop("height", gridHeight);
+
+        $("#containerGrid").width(gridWidth + 2);
+        $("#containerGrid").height(gridHeight + 2);
     })
 
    $("#buttonStart").click(function() {        
-       var main = new Main("canvasGrid", "#lines", Configuration);
+       var main = new Main("canvasGrid", "canvasPreview", "#lines", Configuration);
         
         main.initializeGame();
         main.startGameLoop();
    })
+
 </script>

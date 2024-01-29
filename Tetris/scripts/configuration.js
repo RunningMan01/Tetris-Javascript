@@ -6,5 +6,5 @@ class Configuration {
   static levelIntervalReduction = 50; // ms - reduction in time when user completes required number of rows
   static levelIncreaseTrigger = 5; // number of completed rows that trigger a level increase (reduce time interval)
   static userMovementTime = this.shapeDropTime / 4;  // ms - wait time between user moving shape
-  static labelScoreValue = "#labelScoreValue";  // id of the current score value    
+  static labelScoreValue = "#labelScoreValue";  // id of the current score value
 }

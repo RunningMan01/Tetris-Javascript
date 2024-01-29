@@ -1,5 +1,5 @@
 class Main {
-    #ctx = null;
+    #gridCtx = null;
     #render = null;
     #canvasId = null;
     #linesId;
@@ -13,18 +13,22 @@ class Main {
     #currentShapeDropTime;
     #currentUserMovementTime;
     #rowsCounter;
-    constructor(canvasId, linesId, configuration) {
-      this.#canvasId = '#' + canvasId;
-      this.#linesId = linesId;
-      this.#configuration = configuration;
-      this.#ctx = document.getElementById(canvasId).getContext("2d");
-      this.#render = new Render(this.#ctx, this.#configuration);
-      this.#keyboardHandler = new KeyboardHandler(canvasId);
-      this.#numberOfLines = 0; 
-      this.#score = 0;  
-      this.#currentShapeDropTime = this.#configuration.shapeDropTime; 
-      this.#currentUserMovementTime = this.#currentShapeDropTime / 4;
-      this.#rowsCounter = 0;    
+    #previewShape;
+    #previewCtx;
+    constructor(gridCanvasId, previewCanvasId, linesId, configuration) {
+        // this.#canvasId = '#' + gridCanvasId;
+        this.#linesId = linesId;
+        this.#configuration = configuration;
+        this.#gridCtx = document.getElementById(gridCanvasId).getContext("2d");
+        this.#previewCtx = document.getElementById(previewCanvasId).getContext("2d");
+        this.#render = new Render(this.#gridCtx, this.#previewCtx, this.#configuration);
+        this.#keyboardHandler = new KeyboardHandler(gridCanvasId);
+        this.#numberOfLines = 0; 
+        this.#score = 0;  
+        this.#currentShapeDropTime = this.#configuration.shapeDropTime; 
+        this.#currentUserMovementTime = this.#currentShapeDropTime / 4;
+        this.#rowsCounter = 0;
+        this.#previewShape = null;
     }
       
     initializeGame() {     
@@ -78,19 +82,26 @@ class Main {
       this.#lastUserMovement = timeObj.previousTime;
     }
 
-    getShape() {    
-      //console.log("getShape: Start") ;
-      var shape; 
-      if (this.#grid.shape === null) {
-        // create and add a new shape to the grid
-        shape = ShapeFactory.createShape();              
-        if (!this.#grid.addShape(shape)) {
-          console.log("End of game!");
-          return false; // end of the game
+    getShape() {
+        var shape; 
+        if (this.#grid.shape === null) {
+            if (this.#previewShape === null) {
+                // new shape is set to current preview shape
+                shape = ShapeFactory.createShape();
+            }
+            else {
+                // set shape to new shape
+                shape = this.#previewShape;
+            }
+            this.#previewShape = ShapeFactory.createShape();
+
+            // attempt to add new shape to the grid              
+            if (!this.#grid.addShape(shape)) {
+                console.log("End of game!");
+                return false; // end of the game
+            }
         }
-      }
-      //console.log("getShape: End");
-      return true;;
+        return true;;
     }
 
     updateScore(rowsRemoved) {    
@@ -130,25 +141,29 @@ class Main {
       timestamp = timestamp || new Date().getTime();
       // console.log("--->time elapsed: " + timestamp);
       // if getShape returns false then its game over
-      if (this.getShape()) {
-        this.userMovementTimeElapsed(timestamp);
+        if (this.getShape())
+        {
+            // draw preview shape
 
-        // draw current grid 
-        this.#render.renderGrid(this.#grid);
+            this.userMovementTimeElapsed(timestamp);
 
-        timeObj = { previousTime: this.#lastElapsedTime };        
-        if (this.timeElapsed(timestamp, timeObj, this.#currentShapeDropTime)) {
-          console.log("this.#currentShapeDropTime: " + this.#currentShapeDropTime);
-          //console.log("--->time elapsed: moving shape down: " + timestamp);
-          var canMove = this.#grid.moveShapeDown();
-          if (!canMove) {
-            // this.increaseLines();  // to do - remove this
-            this.#grid.placeShape();
-            var rowsRemoved = this.#grid.checkFullRows();        
-            this.updateScore(rowsRemoved);
-            this.updateLevel(rowsRemoved);            
+            // draw current grid 
+            this.#render.renderGrid(this.#grid);
+            this.#render.renderPreviewShape(this.#previewShape);
+
+            timeObj = { previousTime: this.#lastElapsedTime };        
+            if (this.timeElapsed(timestamp, timeObj, this.#currentShapeDropTime)) {
+            console.log("this.#currentShapeDropTime: " + this.#currentShapeDropTime);
+            //console.log("--->time elapsed: moving shape down: " + timestamp);
+            var canMove = this.#grid.moveShapeDown();
+            if (!canMove) {
+                // this.increaseLines();  // to do - remove this
+                this.#grid.placeShape();
+                var rowsRemoved = this.#grid.checkFullRows();        
+                this.updateScore(rowsRemoved);
+                this.updateLevel(rowsRemoved);            
             
-          }
+            }
         }
         this.#lastElapsedTime = timeObj.previousTime;        
 
@@ -177,7 +192,7 @@ class Main {
       // Test code
       //var image = new Image(this.#configuration.blockSize, "Red");
       console.log("testCode: " + this.#configuration.blockSize);
-      var render = new Render(this.#ctx, this.#configuration);      
+        var render = new Render(this.#gridCtx, this.#configuration);      
       var grid = new Grid(20, 10);
       //var shape = new L_Shape("Red", 20);
       //var shape = new L_Shape();
